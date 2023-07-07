@@ -1,0 +1,72 @@
+<h1>Hello MJ</h1>
+
+<!-- first method of declaring a component --> 
+<app-student></app-student>
+
+<!--  second method -->
+<div class="app-seconddemo"></div>
+
+<!-- third method -->
+<div app-thirddemo></div>
+
+<!-- Inline templates and Interpolation-->
+<app-test-inp></app-test-inp>
+
+<!-- Property Binding -->
+<app-test-pb></app-test-pb>
+
+<!-- Class Binding -->
+<app-test-classbinding></app-test-classbinding>
+
+<!-- Style Binding -->
+<app-test-stylebinding></app-test-stylebinding>
+
+<!-- Event Binding -->
+<app-test-eventbinding></app-test-eventbinding>
+
+<!-- Template Reference Variables -->
+<app-test-templaterefvariables></app-test-templaterefvariables>
+
+<!-- Two-way Data Binding -->
+<app-test-twowaybinding></app-test-twowaybinding>
+
+<!-- Structural Directives -->
+<!-- ngIF -->
+<app-test-ngif></app-test-ngif>
+
+<!-- ngSwitch -->
+<app-test-ngswitch></app-test-ngswitch>
+
+<!-- ngFor -->
+<app-test-ngfor></app-test-ngfor>
+
+<!-- Compoment Interaction -->
+<app-test-componentinteraction (childInfo)="msg=$event" [fromParent] = "parentmsg"></app-test-componentinteraction>
+<h1> {{msg}} </h1>
+
+<!-- Pipes -->
+<app-test16-pipes></app-test16-pipes>
+
+<!-- Services -->
+<app-test17-services></app-test17-services>
+
+<!-- Services Example1 -->
+<app-test17-student-list></app-test17-student-list>
+<app-test17-student-details></app-test17-student-details>
+
+<!-- Routing -->
+<app-test23-routing></app-test23-routing>
+
+<nav>
+    <a routerLink="/student">Student List</a>
+    <a routerLink="/course-mylist">Course List</a>
+</nav>
+
+<router-outlet></router-outlet>
+
+<!-- Routing Example 
+<app-test23-student-list></app-test23-student-list>
+<app-test23-course-list></app-test23-course-list>
+-->
+
+

@@ -1,0 +1,30 @@
+1.version checking --> ng version
+
+2.Create new project --> ng new <project name>
+    eg: ng new hello-world
+
+3.Run --> ng serve
+
+4. Creating a Component --> ng g c <component name>
+    eg: ng g c student
+
+5. Creating inline template components --> ng g c <component name> -it -is --skipTests=true
+    eg: ng g c student -it -is --skipTests=true
+
+6. Creating a Service --> ng g s <service name>
+    eg: ng g s student
+
+7. Creating Lazy Loading Syntax --> ng g m <name> --route <name> --module app.module.ts
+    eg: ng g m faculty --route faculty --module app.module.ts
+
+8. Route Guard syntax --> ng g guard <guard-name>
+
+9. BootStrap --> npm install bootstrap jquery popper --save
+
+10. creating a class --> ng g class <class name>
+
+11. Server setup --> npm init --yes
+                 --> npm install --save express body-parser cors
+    for running --> node server
+
+

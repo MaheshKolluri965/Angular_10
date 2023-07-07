@@ -1,0 +1,347 @@
+Architecture:
+------------
+
+(1)Module:-
+    - It is the first building block of Angular Application.
+    - Angular apps are modular in nature.
+    - Angular Application is a collection of individual modules.
+    - Every Module represents a feature area in Angular Application.
+
+        eg:
+        1. User Module related to Application Users.
+        2. Admin Module related to Application Administrators.
+     
+     - Every Angular Application has atleast one Module, known as Root_Module.
+     - By convention this is called as "App-Module".
+     - Each Module is made up of Components and Services.
+
+(2)Components:-
+    - Components controls a portion of the view on the browser.
+    - Angular Application has atleast one Component, known as Root_Component.
+    - By convention this is called as "App-Component".
+    - All other user created Components are nested under this App-Component.
+    - Each Component contains HTML Template(view) + Class(logic to control the view).
+    - Services contains the bussiness logic of your Application.
+
+
+    - [Template]    +   [Class]     +   [Meta Data] 
+    - [View/HTML(User Interface)] + [CODE(Using TypeScript(data & methods))] + [Information
+    (Decorator -> One of the feature of TypeScript, it provides the information about the class 
+    attached to it)]
+
+(3)Interpolation:-
+    - {{}} --> One way binding from CLASS to TEMPLATE.
+    - By using {{}} we can use the property value of its corresponding class.
+    - string interpolation is one-way data binding technique, which is used to output the
+      data from typescript code.
+    - the syntax of using a field using double curly braces is called "Binding Expression"
+    - you can pass methods but Boolean values, assignments, passing url's is not possible.
+
+(4)Property Binding:-
+    - []
+
+    Property vs Attribute:
+        - Attributes and properties are not the same.
+        - Attributes are defined by HTML.
+        - properties are defined by DOM(Document Object Model).
+        - Attributes intialize DOM properties and then they are done.
+        - Attribute values cannot change once they are intialized.
+        - Property values however can change.
+
+(5)Class Binding:-
+        - []
+        - for binding an class.
+        - for mutiple class binding we need to use [ngClass]
+
+(6)Style Binding:-
+        - []
+        - for binding an Style
+        - for multiple styles --> [ngStyle]
+
+(7)Event Binding:-
+        - ()
+        - property binding ----> passing values from CLASS to VIEW (one way binding)
+        - Event binding ----> passing values from VIEW to CLASS
+
+         {}  - Method Definition
+        {{}} - Interpolation
+         []  - Property Binding
+         ()  - Event Binding
+
+(8)Template Reference Variables:-
+        - need to use #
+            eg: <input #msg type="text">
+                <button (click)="message(msg.value)" type="button" > Welcome </button>
+
+(9) Two Way Data Binding:-
+        - ngModel directive is used to achieve two-way data binding.
+        - Must import "import {FormsModule} from '@angular/forms'" in app.module.ts file.
+        - Property binding + Event Binding
+        -            []    +   ()
+        -                 [()]      (banana in the box)
+
+(10) Structural Directives:
+        - used for adding or removal of HTML elements from the template.
+        - commonly used structural directives are 
+                - 1.ngIf      - both are used for conditonally render HTML elements
+                - 2.ngSwitch
+                - 3.ngFor     - used of render list of HTML elements.
+
+(11) Component Interaction:-
+        - Communcation between two components using Decorators.
+                ie. Parent to child --> @input()
+                    Child to Parent --> @output()
+
+(12) Pipes:-
+        - used to transform the incoming stream of data into required format before displaying 
+          in the view.
+        Types of Pipes:-
+                - See the code
+
+(13) Services:-
+        - Principles:-
+                - DRY (Do Not Repeat Yourself)
+                - Single Resposibility --> single component have to share single resposibility
+        - Services:-
+                - Share Data
+                - Implement Application logic
+                - External Interaction
+                - Naming Convention --> xxxxxxx.service.ts 
+
+(14) Dependency Injection:- 
+        - 1.Dependency Injection as a Design Patterns.(If no of dependecies are more than 
+                                                                        it is not flexible)
+        - 2.Dependency Injection as a framework.
+                - we have to create all dependecies in injector and components will import the 
+                  dependecies from the injector.
+                - Injector has to register all dependecies.
+                - Injector acts like a container for all dependecies.
+        
+        Using a Service:-
+                DI as a framework:
+                        - 1. Define the studentService class.
+                        - 2. Register with Injector.
+                        - 3. Declare as Dependency in Student-list and Student-details components. 
+                - After creating a service import and add it in providers in app.module.ts since 
+                  this is parent for all components.
+                - Register the injector in service class.
+                - Declare the dependecy in constructor of the component.
+                - intailze in ngOnInit() method
+
+(15) HTTP and Observables:-
+        Observables:
+                - An Observable is a sequence of items that arrives asynchronously overtime.
+                - HTTP call(request) <-> single item <-> HTTP response.
+                - In Angular, an Observable is HTTP response which arrives asynchronously.
+                - But, that incoming HTTP response(Observable) is not ready to use in our Application.
+                - So, after receiving the Observable we need to convert the incoming response 
+                  into an ARRAY.
+                - After conversion into an ARRAY only it is ready to use in our application.
+
+                Steps to follow in our Example:
+                        - 1. HTTP Get request from StudentService.
+                        - 2. Receive the Observable and cast it into Student Array.
+                        - 3. Subscribe to the Observable from Student-list and Student-details.
+                        - 4. Assign the Student Array to the local Variable.
+
+                        NOTE: RxJs(Reactive Extensions for JavaScript) is an external library used 
+                        in Angular to work with Observables.
+
+                Fetching Data using HTTP:
+                        - import HttpClientModule in app.module.ts file.
+                        - add it in imports array also.
+                        - define HttpClient in studentService constructor. 
+
+                HTTP Error Handling:
+                        - using pipe method and Subscribe
+
+(16) Routing & n\Navigation:-
+        - Any Angular application is built with multiple components.
+        - Each Component has its own view.
+        - Based on user action, it may necessary to navigate among the views.
+        - For this purpose we use angular routers.
+        - we will declare the routes in app-routing.module.ts file.
+        - Each route is nothing but an object.
+
+(17) Wild Card Routes:-
+        - Need to use ** in path.
+        - it must be declare in last of all the routes.
+
+(18) Optional Route parametrs:-
+        - If the url is already constructed then we have to use optional Route parameters.
+        - eg: we use it for selecting the previous object when we click the button.
+        - when we use / (forward slash) then it is called absolute Navigation.
+        - In Absolute Navigation, we have to change the name of the Route everywhere you use them 
+          in your code.
+        - this is the disadvantage of absolute navigation.
+
+(19) Relative Navigation:-
+        - To get out of above problem we can use Relative Navigation.
+        - Here you need to make changes at app-routing.module.ts and app.component.html files only.
+
+(20) Child Routes:-
+        - Particular rotues must be visible in particular components only for this we will use 
+          child routes.
+        
+(21) Lazy Loading:-
+        - In Angular by default, Modules are eagerly loaded. Means, as soon as the app loaded 
+          all modules are loaded without checking whether they are immediate required or not.
+        - Lazy Loading is a design pattern that loads required modules only.
+        - Lazy loading helps to keep intial bundle size smaller, which helps to decrease the 
+          load time and increase the performance.
+        - When user logged in and when he navigates only, orders and history of orders are visible.
+
+        Two steps to create a Lazy loading feature:-
+                1. Create a feature module.
+                2. Configure load children in appRouting.
+        Syntax:
+                ng g m faculty --route faculty --module app.module.ts
+
+(22) Route Guards:-
+        - Route Guards are used to prevent users from navigating without having Authorization rights.
+        - Route Guards are used to secure the route paths.
+        - We can Generate any no of guards based on our application requirement.
+        - Whenever we implement a route gaurd, it will give Boolean value(true or false).
+        - Based on this Boolean value, Angular router decide if user should access the route or not.
+
+                Syntax:
+                        ng g guard <guard-name>
+                        --> Inject this guard in our module under providers array.
+        Types of Guards:-
+                - Various types of Guards:
+                        - CanActivate - Checks to see if a user can visit a route.
+                        - CanActivateChild - Checks to see if a user can visit a route children.
+                        - CanDeactivate - Checks to see if a user can exit a route.
+                        - Resolve - Performs route data retrieval before route activation.
+                        - CanLoad - Checks to see if a user can route to a module that lazy loaded.
+                NOTE: Route Guard resolves to TRUE or FALSE based on custom logic and Functioanlity.
+
+(23) Angular Forms:
+        - Forms are very importatnt for any bussiness application.
+        - Forms are used to create an experience that guides the user effeciently and
+          effectively through the workflow.
+        - As a Developer, we have to do
+                - Data Binding
+                - Change Tracking 
+                - Validation
+                - Visual FeedBack
+                - Displaying Error Message
+                - Form Submission
+
+        --> Template (HTML used to collect Data from the user) --> Class(In Class We make Data binding)
+                 --> Service (Collected Data send to using a servide) --> Server
+        
+        2 types of forms:
+                1. Template Driven form: Most of the code written in HTML file. 
+                2. Reactive Forms / Model Driven Forms: Most code written in Component Class.
+
+(24) Template Driven Forms:(TDF)
+        - Template driven forms are froms where we write logic, validation, controls etc., in the 
+          template part of the code(i.e HTML code) 
+        - The template is responsible for setting up the form, the validation, control, group etc.
+        - TDF are suitable for simple scenarios, uses two way data binding using the [(NgModel)] syntax.
+        - But unit testing might be a challenge.
+
+        How to enable TDF:
+                - To use the TDF, we need to explicitly import {FormsModule} from '@angular/forms'.
+                
+                ngModel:
+                        - we need the ngModel in the form input and the input must be named.
+                        eg: <input type="text" ngModel name="firstName">
+
+                For a particulr element:
+                - There are cases where we need pass an event listener to the input field, or pass the value 
+                  of the input to our component, we need assign a template reference variable to the input
+                  eg:
+                        <input type="text" ngModel
+                              name="firstName"
+                              #firstName="ngModel"
+                              (any-event)="event-Handler(firstName)">
+                
+                For group of Elements:
+                ngForm:
+                 The ngForm is an instance of the FormGroup. The FormGroup represents the group of FormControl,
+                 each form is a formGroup because it will have at least one FormControl that gives us access to
+                 (nrSubmit) which can be bind to a method in our component.
+                 Eg:
+                 <form #formName="ngForm" (ngsubmit)="submit(formName)">
+                     <input type="text" ngModel
+                      name="firstName"
+                      #firstName=ngModel"
+                      (any-event)="eventHandler(firstName)"> 
+                </form>
+
+(25) Adding BootStrap in our Project:
+        - npm install bootstrap jquery popper --save
+        - In angular .json file add below lines
+          "styles": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+        - First need to add jquery then add bootstrap in scripts.
+
+Bootstrap:
+        - Bootstrap is s giant collection of handy. reusable bits of code written in HTML. CSS and JavaScript.
+        - its also a frontend development framwork that enables developers and designers to quickly build fully
+          responsive websites.
+        - Bootstrap is completly free to use in personal and commercial projects. 
+        - Boostrap saves you from writting lots of CSS code.
+        - Bootstrap plays well with any framework of your choice. custom code. Angular of React etc.,
+
+What is Responsive Design?
+       - Responsive web design is the approach that suggests that design and development should respond
+         to the users behsvior and environment based on screen size, platform and orientation.
+
+Bootstap Container Layout:
+        - Containers are the most basic layout element in Boostrap.
+        - Containers are used to pad the content inside of them.
+        - 2 types of container classes available
+                - .container --> class provides fixed width container.
+                - .Container-fluid --> class provides a full width container, snapping the entire width of the viewport.
+                eg:
+                        - <div class="container"></div> //fixed width
+                        - <div class="container-fluid"></div> //100% of width of screen
+                - Fluid container width is always 100% 
+
+        
+        Important Notes:
+                ngModel:
+                 - Must need to include ngModel in code, if not the element will not be tracked.
+
+                name attribute:
+                 - must need to give the name attribute.
+
+(26) Binding data to UserModel:
+        - Create class for userModel(eg: user.ts) and give the names. We have to do two way binding here.
+
+(27) Tracking state and Validity:
+        - state                         class if TRUE                   class if FALSE
+        the control has been visited    ng-touched                      ng-untouched
+        the control's value has changed ng-dirty                        ng-pristine
+        the control's value os valid    ng-valid                        ng-invalid
+
+(28) Express server:
+        - Need to setup the server with cmd --> npm init --yes
+        - npm install --save express body-parser cors
+        - express - web server, body-parser - middleware to handle data, 
+                cors - package to make request across diffferent ports
+
+        - for running the server cmd-> node server
+        - 200 - request is successfull.
+
+(29) Reactive forms: (Model driven form)
+        - code and logic resides in component class.
+        - No Two way data binding and as name suggested, we are ging to react based on user input values/
+        - Well suited for Complex scenerios.
+                - Dynamic Form fields: Providing an option for adding an other email or address.
+                - custom validation: password and confirm password validation.
+                Dynamic validation: if we want to subcribe for promotional information, then email filed is mandatory. otherwise email filed is optional/
+        - unit testing.
+
+ 
+
+
