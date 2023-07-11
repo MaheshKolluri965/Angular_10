@@ -58,7 +58,7 @@
                     <label appChangeColor> Password: </label>
                 </div>
                 <div class="form-group inputBox">
-                    <input [class.is-invalid] = "register?.errors?.['misMatch']"
+                    <input [class.is-invalid] = "register['misMatch']"
                     type="password" formControlName="confirmPassword" class="form-control" required="">
                     <label appChangeColor> Confirm password: </label>
                     <small class="text-danger" *ngIf="registrationForm.errors?.['misMatch']">passwords do not match</small>
