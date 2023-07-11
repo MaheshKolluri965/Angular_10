@@ -428,6 +428,11 @@ Bootstap Container Layout:
         - when we need to add another filed in form if the user clicks on the add button.
         eg: alternative email, phn no etc.
         - Need to import FormArray.
+(38) submission:
+        - server setup same as previous.
+
+
+--------------*********Completed****************------------------
 
 
  
