@@ -8,19 +8,23 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
 import { ReactiveForms1Component } from './reactive-forms1/reactive-forms1.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ChangeColorDirective } from './change-color.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestTdfComponent,
     ReactiveFormsComponent,
-    ReactiveForms1Component
+    ReactiveForms1Component,
+    ChangeColorDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

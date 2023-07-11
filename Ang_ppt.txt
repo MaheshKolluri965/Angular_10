@@ -29,6 +29,9 @@ Architecture:
     (Decorator -> One of the feature of TypeScript, it provides the information about the class 
     attached to it)]
 
+    Note: For any component you have created, you must need to declare it in app.component.html file
+          for web visibility.
+
 (3)Interpolation:-
     - {{}} --> One way binding from CLASS to TEMPLATE.
     - By using {{}} we can use the property value of its corresponding class.
@@ -47,6 +50,9 @@ Architecture:
         - Attributes intialize DOM properties and then they are done.
         - Attribute values cannot change once they are intialized.
         - Property values however can change.
+
+        <input> [disabled]="isDisabled" id="{{courseId}}" type="text" value="Angular10">
+        <input> bind-disabled="isDisabled" id="{{courseId}}" type="text" value="Angular10">
 
 (5)Class Binding:-
         - []
@@ -91,6 +97,16 @@ Architecture:
         - Communcation between two components using Decorators.
                 ie. Parent to child --> @input()
                     Child to Parent --> @output()
+
+        (1) Parent to child:
+                - app.component.ts --> app.component.html --> child(.ts file) file --> child(.html file)
+        [declare the msg] - [need to use the property binding] - [use @input('msg') decorator] - [web visibility]
+
+        (2) Child to Parent:
+                - child(.ts file) --> --> child(.html file) --> app.component.html
+                - in child(.ts file) --> need to use @output decorator with eventEmitter method.
+                - then need to raise an event in child(.html file) with event binding.
+                - then in app.component.html need to use event binding and interpolation.
 
 (12) Pipes:-
         - used to transform the incoming stream of data into required format before displaying 
@@ -341,6 +357,78 @@ Bootstap Container Layout:
                 - custom validation: password and confirm password validation.
                 Dynamic validation: if we want to subcribe for promotional information, then email filed is mandatory. otherwise email filed is optional/
         - unit testing.
+
+        Steps: Need to use FormGroup, formControlName
+                1. I have already created a form with name password and confirm password by using just html and css.
+                2. in app.module.ts file import the 
+                        import { ReactiveFormsModule } from '@angular/forms';
+                3. in imports if not.
+                4. go to reactive-forms.component.ts file and import
+                        import { FormGroup } from '@angular/forms';
+                5. Create an instance for FormGroup and inside it create instance for FormControl(from html declarations).
+                6. In reactive-forms.component.html file use property binding and bind FormGroup.
+                7. For every control write formControlName = "delared variable in .ts file".
+                8. For checking just use interpolation and check whether data is loading or not.
+
+(30) Custom Directive:
+        - ng g directive <name>
+        - this is used for creating custom directive, which can used any where in the code.
+        - we can custom directives by using event listeners, so need to import Hostlistener.
+
+(31) Nesting Form groups:
+        - Nesting is by done Form group.
+
+(32) Setting formcontrol value:
+        - setValue() --> Strictly follows the order, if any of the filed is not available then it will not work.
+        - For fecthing the details which we want, need to use patchValue() method.
+
+(33) Form Builder:
+        - For avoiding the repeatation of data thorugh FormGroup, we will use Form Builder.
+        - Recommended to use Form Builder.
+
+(34) Validations:
+        Note: we have done simple validation and custom validation for username
+        simple validations:
+                - import { Validators } from '@angular/forms';
+                - using Validators we can write the validations. 
+                - For multiple validations need to use a array.
+
+        Note : 
+        1. i got compilation error "Object is possibly 'null'", for this i have added ? in the code stmt.
+                eg: [class.is-invalid]="registrationForm.get('userName')?.invalid 
+                    && registrationForm.get('userName')?.touched" 
+        2. [not Recommended]when i am getting compaliation error, "strictNullChecks": false, i have used this in tsconfig.json file.
+               
+        1. Error: Property 'required' comes from an index signature, so it must be accessed with ['required'].
+           Error code:  <small class="text-danger" *ngIf="registrationForm.get('userName')?.errors?.required">username is required</small>
+           correct code: <small class="text-danger" *ngIf="registrationForm.get('userName')?.errors?.['required']">username is required</small>
+
+(35) Custom Validations:
+        - user defined validations.
+        - can use any component in the code.
+
+        steps:
+                - need to import AbstractControl.
+                - see the code.
+                - faced an error when i written just forbidden in code, so adjusted to ['forbidden']
+        error code:  <small class="text-danger" *ngIf="userName?.errors?.['forbiddenName']">{{userName?.errors?.forbiddenName.value}} username is not allowed</small>
+        correct code:<small class="text-danger" *ngIf="userName?.errors?.['forbiddenName']">{{userName?.errors?.['forbiddenName'].value}} username is not allowed</small>
+                    
+                - the above is for only one name validator but passing more validators it is better to make 
+                  it dynamic. so use factory function.
+                - import { AbstractControl, ValidatorFn } from "@angular/forms";
+
+(35) Cross Validation:
+        - Note: For password and confirmpassword cross validation is used.
+
+(36) Conditional Validation:
+        - Note: added email and subscribe me for conditional validation.
+
+(37) Dynamic Form Control:
+        - when we need to add another filed in form if the user clicks on the add button.
+        eg: alternative email, phn no etc.
+        - Need to import FormArray.
+
 
  
 

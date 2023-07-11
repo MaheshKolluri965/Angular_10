@@ -1,20 +1,100 @@
 <div class="box">
-    <h2>Register</h2>
-    <form>
-        <div class="form-group inputBox">
-            <input type="text" class="form-control" required="">
-            <label> Username: </label>
+    <h2 appChangeColor>Register</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)">
+        <div class="row">
+            <!-- First half -->
+            <div class="col-6">
+                <div class="form-group inputBox">
+                    <input [class.is-invalid]="userName?.invalid 
+                    && userName?.touched" 
+                    type="text" formControlName="userName" class="form-control" required="">
+                    <label appChangeColor> Username: </label>
+                    <!-- 
+                    we have done simple validation and custom validation for username
+                    <small [class.d-none]="registrationForm.get('userName').value 
+                    || registrationForm.get('userName').untouched" class="text-danger">user name is required</small>  
+                    -->  
+                    <div *ngIf="userName?.invalid && userName?.touched">
+                        <small class="text-danger" *ngIf="userName?.errors?.['required']">
+                            username is required
+                        </small>
+                        <small class="text-danger" *ngIf="userName?.errors?.['minlength']">
+                            username must be atleast 2 characters
+                        </small>
+                        <small class="text-danger" *ngIf="userName?.errors?.['forbiddenName']">
+                            {{userName?.errors?.['forbiddenName'].value}} username is not allowed
+                        </small>
+                    </div>
+                </div>
+
+                <!--added email and subscribe me for conditional validation-->
+                <div class="form-group inputBox">
+                    <input [class.is-invalid]="email.invalid && email.touched" 
+                    type="email" formControlName="email" class="form-control" required="">
+                    <label appChangeColor>Email: </label>
+                    <small class="text-danger" [class.d-none]="email.valid || email.untouched">
+                        email is required
+                    </small>      
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" formControlName="subscribe" class="form-check-input" required="">
+                    <label appChangeColor>Subcribe me </label>
+                </div>
+
+                <div class="form-group inputBox">
+                    <!--Dynamic validation(adding alternative emails etc)-->
+                    <button (click)="addAlternateEmails()" type="button" class="btn btn-primary btn-sm m-4">Alternate email</button> 
+                    
+                    <div formArrayName="alternativeEmails" *ngFor="let add of alternateEmails.controls;
+                    let i = index">
+                        <input placeholder="Alternate Email" type="text" class="form-control my-1" [formControlName]="i">
+                    </div>
+                </div>
+
+                <!--in password and confirm password for checking - used cross validation -->
+                <div class="form-group inputBox">
+                    <input type="password" formControlName="password" class="form-control" required="">
+                    <label appChangeColor> Password: </label>
+                </div>
+                <div class="form-group inputBox">
+                    <input [class.is-invalid] = "register?.errors?.['misMatch']"
+                    type="password" formControlName="confirmPassword" class="form-control" required="">
+                    <label appChangeColor> Confirm password: </label>
+                    <small class="text-danger" *ngIf="registrationForm.errors?.['misMatch']">passwords do not match</small>
+                </div>
+            </div>
+
+            <!-- Second half -->
+            <div class="col-6">
+                <div formGroupName="address">
+                    <div class="form-group inputBox">
+                        <input type="text" formControlName="city" class="form-control" required="">
+                        <label appChangeColor> City: </label>
+                    </div>
+                    <div class="form-group inputBox">
+                        <input type="text" formControlName="state" class="form-control" required="">
+                        <label appChangeColor> State: </label>
+                    </div>
+                    <div class="form-group inputBox">
+                        <input type="text" formControlName="pincode" class="form-control" required="">
+                        <label appChangeColor> Pincode: </label>
+                    </div>      
+                </div>
+            </div>
         </div>
-        <div class="form-group inputBox">
-            <input type="password" class="form-control" required="">
-            <label> Password: </label>
+        
+        <!-- submit and display -->
+        <div>     
+            <input appChangeColor type="submit" name="submit" value="submit">
+            <input (click)="displayValues()" appChangeColor type="button" name="display" value="Display">
         </div>
-        <div class="form-group inputBox">
-            <input type="password" class="form-control" required="">
-            <label> confirm password: </label>
-        </div>  
-        <input type="submit" name="submit" value="submit">
     </form>    
+    
+    <!--just for checking whether data is binded or not-->
+    <div class="myValues">
+        {{registrationForm.value | json}}
+    </div>
 </div>
 
 

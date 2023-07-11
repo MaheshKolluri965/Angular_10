@@ -27,4 +27,6 @@
                  --> npm install --save express body-parser cors
     for running --> node server
 
+12. Custom Directive --> ng g directive <name>
+    eg: ng g directive changeColor
 
